@@ -152,8 +152,7 @@ export default function HomePage() {
           <div className="container px-4 md:px-6 text-center mx-auto max-w-4xl">
             <div className="space-y-8">
               <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-balance">
-                Esplora il Mondo delle Aste con Likan
-              </h1>
+VAFFANCULO              </h1>
               <p className="mx-auto max-w-[800px] text-[#4C1D95] md:text-xl lg:text-lg xl:text-xl leading-relaxed">
                 Esplora un mondo di oggetti unici, dalle antichità rare alle moderne collezioni.
               </p>
