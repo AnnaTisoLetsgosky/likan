@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ruoli {
+  id           Int            @id @default(autoincrement())
+  nome         String         @unique @db.VarChar(50)
+  utenti_ruoli utenti_ruoli[]
+}
+
+model utenti {
+  id                   Int            @id @default(autoincrement())
+  nome                 String         @db.VarChar(100)
+  cognome              String         @db.VarChar(100)
+  data_nascita         DateTime?      @db.Date
+  nazionalita          String?        @db.VarChar(100)
+  email                String         @unique @db.VarChar(255)
+  password_hash        String
+  telefono             String?        @db.VarChar(20)
+  email_verificata     Boolean?       @default(false)
+  telefono_verificato  Boolean?       @default(false)
+  lingua_preferita     String?        @default("it") @db.VarChar(10)
+  avatar               String?
+  username             String?        @unique @db.VarChar(50)
+  saldo                Decimal?       @default(0.00) @db.Decimal(10, 2)
+  iban                 String?        @db.VarChar(34)
+  stripe_customer_id   String?        @db.VarChar(255)
+  utente_bloccato      Boolean?       @default(false)
+  motivo_blocco        String?
+  documenti_verificati Boolean?       @default(false)
+  preferenze_notifiche Json?
+  accettazione_privacy DateTime?      @db.Timestamp(6)
+  is_admin             Boolean?       @default(false)
+  data_creazione       DateTime?      @default(now()) @db.Timestamp(6)
+  ultima_attivita      DateTime?      @db.Timestamp(6)
+  utenti_ruoli         utenti_ruoli[]
+}
+
+model utenti_ruoli {
+  id           Int       @id @default(autoincrement())
+  user_id      Int?
+  ruolo_id     Int?
+  assegnato_il DateTime? @default(now()) @db.Timestamp(6)
+  ruoli        ruoli?    @relation(fields: [ruolo_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  utenti       utenti?   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model categorie {
+  id              Int              @id @default(autoincrement())
+  nome            String           @unique @db.VarChar(100)
+  sottocategorie  sottocategorie[]
+  prodotti        prodotti[]
+}
+
+model sottocategorie {
+  id           Int        @id @default(autoincrement())
+  nome         String     @db.VarChar(100)
+  categoria_id Int
+  categoria    categorie  @relation(fields: [categoria_id], references: [id])
+  prodotti     prodotti[]
+}
+
+model condizioni_prodotti {
+  id        Int        @id @default(autoincrement())
+  descrizione String?  @db.VarChar(100)
+  prodotti   prodotti[]
+}
+
+model prodotti {
+  id                      Int                 @id @default(autoincrement())
+  user_id                 Int
+  nome                    String              @db.VarChar(255)
+  descrizione             String?
+  categoria_id            Int
+  sottocategoria_id       Int
+  condizione_id           Int
+  prezzo_base             Decimal             @db.Decimal(10, 2)
+  prezzo_corrente         Decimal             @db.Decimal(10, 2)
+  offerta_massima_user_id Int?
+  incremento_minimo       Decimal             @default(1.00) @db.Decimal(10, 2)
+  valutazione             Decimal?            @db.Decimal(10, 2)
+  stato_verifica          String?             @db.VarChar(20)
+  stato_asta              String              @default("in_attesa") @db.VarChar(20)
+  data_inizio             DateTime?
+  data_fine               DateTime?
+  immagini                Json                @default("[]")
+  creato_il               DateTime            @default(now())
+
+  // RELAZIONI
+  utente                  utenti              @relation("UtenteProdotti", fields: [user_id], references: [id])
+  offerta_massima_utente utenti?             @relation("OffertaMassimaUtente", fields: [offerta_massima_user_id], references: [id])
+  categoria               categorie           @relation(fields: [categoria_id], references: [id])
+  sottocategoria          sottocategorie      @relation(fields: [sottocategoria_id], references: [id])
+  condizione              condizioni_prodotti @relation(fields: [condizione_id], references: [id])
+}
+

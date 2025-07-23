@@ -619,13 +619,13 @@ export default function HomePage() {
                 className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-[#4C1D95]/5 transition-colors duration-200"
               >
                 <Image
-                  src="/placeholder.svg?height=80&width=80&text=Brand+1"
+                  src="/apple.png?height=80&width=80&text=Brand+1"
                   width={80}
                   height={80}
                   alt="Brand Logo 1"
                   className="object-contain h-20 w-20"
                 />
-                <span className="text-sm font-medium text-[#4C1D95]">Brand 1</span>
+                <span className="text-sm font-medium text-[#4C1D95]">Apple</span>
               </Link>
               {/* Brand Logo 2 */}
               <Link
@@ -633,13 +633,13 @@ export default function HomePage() {
                 className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-[#4C1D95]/5 transition-colors duration-200"
               >
                 <Image
-                  src="/placeholder.svg?height=80&width=80&text=Brand+2"
+                  src="/lego.png?height=80&width=80&text=Brand+2"
                   width={80}
                   height={80}
                   alt="Brand Logo 2"
                   className="object-contain h-20 w-20"
                 />
-                <span className="text-sm font-medium text-[#4C1D95]">Brand 2</span>
+                <span className="text-sm font-medium text-[#4C1D95]">LEGO</span>
               </Link>
               {/* Brand Logo 3 */}
               <Link
@@ -647,13 +647,13 @@ export default function HomePage() {
                 className="flex flex-col items-center gap-2 p-4 rounded-lg hover:bg-[#4C1D95]/5 transition-colors duration-200"
               >
                 <Image
-                  src="/placeholder.svg?height=80&width=80&text=Brand+3"
+                  src="/lv.png?height=80&width=80&text=Brand+3"
                   width={80}
                   height={80}
                   alt="Brand Logo 3"
                   className="object-contain h-20 w-20"
                 />
-                <span className="text-sm font-medium text-[#4C1D95]">Brand 3</span>
+                <span className="text-sm font-medium text-[#4C1D95]">Louis Vuitton</span>
               </Link>
               {/* Brand Logo 4 */}
               <Link
